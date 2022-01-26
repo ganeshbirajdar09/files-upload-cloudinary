@@ -27,7 +27,7 @@ app.use(
 //   console.log(req.body);
 //   res.send(req.body);
 // });
-app.post("/mypost", async (req, res) => {
+app.post("/mypost", (req, res) => {
   // console.log(req.body);
   // console.log(req.files);
 
@@ -56,7 +56,7 @@ app.post("/mypost", async (req, res) => {
   let file = req.files.samplefile;
 
   // TODO: acc to docs 'results' u can use superman
-  result = await cloudinary.uploader.upload(file.tempFilePath, {
+  result = cloudinary.uploader.upload(file.tempFilePath, {
     folder: "blogs",
   });
 
