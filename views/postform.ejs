@@ -15,10 +15,10 @@
     <title>POST form</title>
   </head>
   <body class="bg-dark text-white">
-    <div class="container mt-4 col-4 col-offset-6">
-      <h1 class="display-3">POST form</h1>
+    <div class="container mt-4 col-12 col-offset-6">
+      <h1 class="display-3">Upload Blog Image</h1>
       <form method="POST" action="/mypost" enctype="multipart/form-data">
-        <div class="mb-3">
+        <!-- <div class="mb-3">
           <label for="firstname" class="form-label">firstname</label>
           <input
             type="text"
@@ -40,15 +40,14 @@
             name="lastname"
             mul
           />
-        </div>
+        </div> -->
         <div class="mb-3">
-          <label for="samplefile" class="form-label">lastname</label>
+          <label for="samplefile" class="form-label">Select Image</label>
           <input
             type="file"
             class="form-control"
             id="lastname"
             name="samplefile"
-            multiple
           />
         </div>
 

@@ -23,62 +23,64 @@ app.use(
   })
 );
 
-app.get("/myget", (req, res) => {
-  console.log(req.body);
-  res.send(req.body);
-});
+// app.get("/myget", (req, res) => {
+//   console.log(req.body);
+//   res.send(req.body);
+// });
 app.post("/mypost", async (req, res) => {
-  console.log(req.body);
-  console.log(req.files);
+  // console.log(req.body);
+  // console.log(req.files);
 
   let result;
   let imageArray = [];
 
   // case - multiple images
+  // if (req.files) {
+  //   for (let index = 0; index < req.files.samplefile.length; index++) {
+  //     let result = await cloudinary.uploader.upload(
+  //       req.files.samplefile[index].tempFilePath,
+  //       {
+  //         folder: "blogs",
+  //       }
+  //     );
 
-  if (req.files) {
-    for (let index = 0; index < req.files.samplefile.length; index++) {
-      let result = await cloudinary.uploader.upload(
-        req.files.samplefile[index].tempFilePath,
-        {
-          folder: "users",
-        }
-      );
-
-      imageArray.push({
-        public_id: result.public_id,
-        secure_url: result.secure_url,
-      });
-    }
-  }
+  //     imageArray.push({
+  //       public_id: result.public_id,
+  //       secure_url: result.secure_url,
+  //     });
+  //   }
+  // }
 
   // FIXME: use case for single image
   // #TODO: in form we are calling samplefile
-  // let file = req.files.samplefile;
+  let file = req.files.samplefile;
 
   // TODO: acc to docs 'results' u can use superman
-  // result = await cloudinary.uploader.upload(file.tempFilePath, {
-  //   folder: "users",
-  // });
+  result = await cloudinary.uploader.upload(file.tempFilePath, {
+    folder: "blogs",
+  });
 
-  console.log(result);
+  // console.log(result);
 
   details = {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     result,
-    imageArray,
+    // imageArray,
   };
-  console.log(details);
+  // console.log(details);
 
-  res.send(details);
+  // res.send("Upload Sucess ");
+  res.render("success");
 });
 
-app.get("/mygetform", (req, res) => {
-  res.render("getform");
-});
-app.get("/mypostform", (req, res) => {
+// app.get("/mygetform", (req, res) => {
+//   res.render("getform");
+// });
+app.get("/", (req, res) => {
   res.render("postform");
 });
 
-app.listen(4000, () => console.log("Server is running at 4000"));
+app.listen(process.env.PORT || 4000, () =>
+  console.log("Server is running at 4000")
+);
