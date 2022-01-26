@@ -56,9 +56,14 @@ app.post("/mypost", async (req, res) => {
   let file = req.files.samplefile;
 
   // TODO: acc to docs 'results' u can use superman
-  result = await cloudinary.uploader.upload(file.tempFilePath, {
-    folder: "blogs",
-  });
+  result = await cloudinary.uploader
+    .upload(file.tempFilePath, {
+      folder: "blogs",
+    })
+    .then(() => res.render("success"))
+    .catch((err) => {
+      res.render("Error in Uploading image");
+    });
 
   // console.log(result);
 
@@ -71,7 +76,7 @@ app.post("/mypost", async (req, res) => {
   // console.log(details);
 
   // res.send("Upload Sucess ");
-  res.render("success");
+  // res.render("success");
 });
 
 // app.get("/mygetform", (req, res) => {
